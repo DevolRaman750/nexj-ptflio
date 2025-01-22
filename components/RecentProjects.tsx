@@ -2,6 +2,7 @@ import { projects } from '@/data'
 import React from 'react'
 import { PinContainer } from './ui/3d-pin'
 import { FaLocationArrow } from 'react-icons/fa'
+import Image from 'next/image'
 
 const RecentProjects = () => {
   return (
@@ -59,7 +60,7 @@ const RecentProjects = () => {
                             transform:`translateX(-${5*index+2}px)`,
                         }}>
                             
-                            <img
+                            <Image
                             src={icon} alt={icon}
                             className='p-2'
                             />
