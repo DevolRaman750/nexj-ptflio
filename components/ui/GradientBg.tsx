@@ -59,19 +59,23 @@ export const BackgroundGradientAnimation = ({
   }, []);
 
   useEffect(() => {
-    function move() {
-      if (!interactiveRef.current) {
-        return;
-      }
-      setCurX(curX + (tgX - curX) / 20);
-      setCurY(curY + (tgY - curY) / 20);
-      interactiveRef.current.style.transform = `translate(${Math.round(
-        curX
-      )}px, ${Math.round(curY)}px)`;
-    }
+    if (typeof document !== 'undefined') {
+      const handleMouseMove = (event: MouseEvent) => {
+        setCurX(event.clientX);
+        setCurY(event.clientY);
+      };
 
-    move();
-  }, [tgX, tgY]);
+      if (interactive) {
+        document.addEventListener('mousemove', handleMouseMove);
+      }
+
+      return () => {
+        if (interactive) {
+          document.removeEventListener('mousemove', handleMouseMove);
+        }
+      };
+    }
+  }, [interactive]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {

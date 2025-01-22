@@ -54,11 +54,14 @@ export const BentoGridItem = ({
 
   const [copied,setCopied]=useState(false);
 
-  const handleCopy = ()=>{
-    navigator.clipboard.writeText('ramantripathi0707@gmail.com');
-
-    setCopied(true);
-  }
+  const handleCopy = () => {
+    if (typeof document !== 'undefined') {
+      // Your client-side code here
+      navigator.clipboard.writeText('ramantripathi0707@gamil.com');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
   return (
     <div
       className={cn(
