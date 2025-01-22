@@ -39,6 +39,7 @@ export const BackgroundGradientAnimation = ({
   const [curY, setCurY] = useState(0);
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
+
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.body.style.setProperty(
@@ -100,7 +101,9 @@ export const BackgroundGradientAnimation = ({
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
-    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+    if (typeof document !== 'undefined') {
+      setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+    }
   }, []);
 
   return (
@@ -186,7 +189,7 @@ export const BackgroundGradientAnimation = ({
             ref={interactiveRef}
             onMouseMove={handleMouseMove}
             className={cn(
-              `absolute [background:radial-gradient(circle_at_${tgX}px_${tgY},_rgba(var(--pointer-color),_0.8)_0,_rgba(var(--pointer-color),_0)_50%)_no-repeat]`,
+              `absolute [background:radial-gradient(circle_at_${tgX}px_${tgY}px,_rgba(var(--pointer-color),_0.8)_0,_rgba(var(--pointer-color),_0)_50%)_no-repeat]`,
               `[mix-blend-mode:var(--blending-value)] w-full h-full -top-1/2 -left-1/2`,
               `opacity-70`
             )}
